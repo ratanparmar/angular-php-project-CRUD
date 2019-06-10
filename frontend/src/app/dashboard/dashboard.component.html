@@ -26,13 +26,13 @@
   <form #f = "ngForm">
     
     <label>Number</label>
-    <input type="text" name="number" [(ngModel)] = "selectedPolicy.number">
+    <input type="text" name="number" [(ngModel)] = "selectedPolicy.number" placeholder="enter your policy number">
     <br>
     <label>Name</label>
-    <input type="text" name="name" [(ngModel)] = "selectedPolicy.name">
+    <input type="text" name="name" [(ngModel)] = "selectedPolicy.name" placeholder="enter your name">
     <br>
     <label>Amount</label>
-    <input type="text" name="amount" [(ngModel)] = "selectedPolicy.amount">
+    <input type="text" name="amount" [(ngModel)] = "selectedPolicy.amount" placeholder="enter your policy amount">
     <br>
     <input type="button" (click)="createOrUpdatePolicy(f)" value="Create or Update Policy">
   </form>

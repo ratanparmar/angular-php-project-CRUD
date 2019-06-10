@@ -8,7 +8,7 @@ if(isset($postdata) && !empty($postdata))
 {
   // Extract the data.
   $request = json_decode($postdata);
-  print_r($request);
+  //print_r($request);
 
 
   // Validate.
@@ -26,9 +26,10 @@ if(isset($postdata) && !empty($postdata))
 
   // Create.
   $sql = "INSERT INTO `policies`(`id`,`number`,`name`,`amount`) VALUES (null,'{$number}','{$name}','{$amount}')";
-
+  
   if(mysqli_query($con,$sql))
   {
+    
     http_response_code(201);
     $policy = [
       'number' => $number,

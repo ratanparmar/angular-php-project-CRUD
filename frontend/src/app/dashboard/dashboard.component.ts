@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { ApiService } from '../api.service'
 import { Policy } from '../policy';
 import { stringify } from '@angular/compiler/src/util';
@@ -10,7 +10,7 @@ import { stringify } from '@angular/compiler/src/util';
 })
 export class DashboardComponent implements OnInit {
 
-
+  @ViewChild('f') formValues;
   policies : Policy[];
   selectedPolicy : Policy = {id:null,number: null,name:'', amount: null}; 
   constructor(private apiService : ApiService) { }
@@ -27,6 +27,7 @@ export class DashboardComponent implements OnInit {
     this.apiService.createPolicy(form.value).subscribe((policy:Policy)=>{
       console.log("Policy created, ", policy);
       this.getPolicies();
+      this.formValues.resetForm();
     })
   }
 
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
   deletePolicy(id : number){
     this.apiService.deletePolicy(id).subscribe((policy: Policy)=>{
       console.log("Policy deleted, ", policy);
+      this.getPolicies();
     })
   }
 
