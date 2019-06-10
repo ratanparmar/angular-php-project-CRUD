@@ -7,22 +7,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  PHP_API_SERVER = "http://127.0.0.1:8080";
+  PHP_API_SERVER = "http://127.0.0.1:8000";
   
   readPolicies():Observable<Policy[]>{
-    return this.http.get<Policy[]>(`${this.PHP_API_SERVER}/api/read.php`);
+    return this.http.get<Policy[]>(`${this.PHP_API_SERVER}/read.php`);
   }
 
   createPolicy(policy:Policy):Observable<Policy>{
-    return this.http.post<Policy>(`${this.PHP_API_SERVER}/api/create.php`,policy);
+    //console.log("check"+policy.name)
+    return this.http.post<Policy>(`${this.PHP_API_SERVER}/create.php`,policy);
   }
 
   updatePolicy(policy: Policy){
-    return this.http.put<Policy>(`${this.PHP_API_SERVER}/api/update.php`,policy);
+    return this.http.put<Policy>(`${this.PHP_API_SERVER}/update.php`,policy);
   }
 
   deletePolicy(id: number){
-    return this.http.delete<Policy>(`${this.PHP_API_SERVER}/api/delete.php/?id=${id}`);
+    return this.http.delete<Policy>(`${this.PHP_API_SERVER}/delete.php/?id=${id}`);
    }
   
 

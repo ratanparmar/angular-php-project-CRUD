@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
 import { Policy } from '../policy';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
 
   policies : Policy[];
-  selectedPolicy : Policy = {id:null, number: null, amount: null, name:''}; 
+  selectedPolicy : Policy = {id:null,number: null,name:'', amount: null}; 
   constructor(private apiService : ApiService) { }
   
   createOrUpdatePolicy(form: any){
@@ -19,10 +20,13 @@ export class DashboardComponent implements OnInit {
       form.value.id = this.selectedPolicy.id;
       this.apiService.updatePolicy(form.value).subscribe((policy: Policy)=>{
         console.log("Policy updated",policy);
+        this.getPolicies();
       });   
     }else
+    
     this.apiService.createPolicy(form.value).subscribe((policy:Policy)=>{
       console.log("Policy created, ", policy);
+      this.getPolicies();
     })
   }
 
@@ -39,12 +43,15 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
-    this.apiService.readPolicies().subscribe((policies:Policy[])=>{
-      this.policies = policies;
-      console.log(this.policies);
-    });
+   this.getPolicies();
     
     
   }
 
+  getPolicies () {
+    this.apiService.readPolicies().subscribe((policies:Policy[])=>{
+      this.policies = policies;
+      //console.log(this.policies);
+    });
+  }
 }

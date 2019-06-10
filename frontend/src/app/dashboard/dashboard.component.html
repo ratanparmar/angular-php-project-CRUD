@@ -4,8 +4,8 @@
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID</th>
-      <th>Policy Number</th>
       <th>Policy Name</th>
+      <th>Policy Number</th>
       <th>Policy Amount</th>
       <th>Operations</th>
 
@@ -24,12 +24,15 @@
   </table>
   <br>
   <form #f = "ngForm">
+    
     <label>Number</label>
     <input type="text" name="number" [(ngModel)] = "selectedPolicy.number">
+    <br>
+    <label>Name</label>
+    <input type="text" name="name" [(ngModel)] = "selectedPolicy.name">
     <br>
     <label>Amount</label>
     <input type="text" name="amount" [(ngModel)] = "selectedPolicy.amount">
     <br>
     <input type="button" (click)="createOrUpdatePolicy(f)" value="Create or Update Policy">
   </form>
-  
